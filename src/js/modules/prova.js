@@ -1,9 +1,12 @@
 import { vObject } from "../../../base/js/base";
 
 
-export const provaFunc = function (a, b) {
-    console.log('paso')
-    return handler.apply(this, a, b);
+export const foo = function (a, b) {
+    console.log(this)
+    
+    return function (a,b){
+        return a+b;
+    };
 }
 
 const provaHandler = {
@@ -33,7 +36,7 @@ export const p = new Proxy(module, {
 })
 
 const handler = function () {
-    return vObject({
+    return new Proxy(provaFunc,{
         get: function (target, name, receiver) {
             console.log(target.__proto__);
             if (target.hasOwnProperty(name)) { // assume methods live on the prototype

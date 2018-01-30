@@ -2,19 +2,22 @@
 import { addModule } from './modules/moto-state/module';
 import { language } from './models/language.model';
 import { header } from './models/header.model';*/
-import { vObject, wrapper } from '../../base/js/base';
+import { vObject, vWrapper } from '../../base/js/base';
 import { handler } from './modules/prova';
-import { provaFunc } from './modules/prova';
+import { foo } from './modules/prova';
 
 class Module{}
-const module = wrapper();
-const m=vObject(wrapper);
 
+const m=vObject(Module);
+const module = new vWrapper();
+console.log(module)
 document.addEventListener('DOMContentLoaded', function (e) {
 //    let p = new base(prova);
     //let module = new Proxy(p, prova);
+    //module.foo=provaFunc;
+    foo.call(module, 1, 2);
+    //console.log(module.foo(1,2))
 
-    console.log(module())
     //console.log(prova(1,2));
 });
 

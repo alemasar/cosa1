@@ -6,30 +6,39 @@ class t { };
 
 const dummy = {};
 
-export let wrapper = function () {
+export let vWrapper = function (func) {
     //new Proxy(, bh);
-    const wrapperh = {
-        get: function (dummyTarget, trapName) {
-            console.log(trapName);
+    //const baseWrapper = vObject(dummy);
+    const vWrapperh = {
+        get: function (dummyTarget, trapName, receiver) {
             //        persistFunc();
-            return vObject.apply(dummyTarget, trapName); //Reflect[trapName];
+            if (dummyTarget.hasOwnProperty(trapName)) {
+               // return dummyTarget[trapName]();
+            }else{
+                console.log(trapName)
+//                dummyTarget[trapName] = func;
+                return vObject(t[trapName])
+            }
+//            console.log(receiver[trapName])
+           // return func();
         }
     }
-    const wrapperP = new Proxy(dummy, wrapperh);
-    return new Proxy(t, wrapperP);
+    //const wrapperP = new Proxy(dummy, wrapperh);
+    return new Proxy(vObject(t), vWrapperh);
 }
 
 export let vObject = function (obj) {
-    //new Proxy(, bh);
+    console.log(obj);
     const vObjecth = {
         get: function (dummyTarget, trapName) {
-            console.log(trapName);
             //        persistFunc();
+            console.log(dummyTarget)
             return Reflect[trapName];
         }
     }
-    const vObjectP = new Proxy(dummy, vObjecth);
-
-    return new Proxy(obj, vObjectP);
+    //let objP=new Proxy(obj, vObjecth);
+    //const vObjectP = new Proxy(dummy, vObjecth);
+    //console.log(objP);
+    return new Proxy(t, obj);
 }
 
