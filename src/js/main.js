@@ -13,13 +13,12 @@ const module = new Proxy(Methods, {
 });
 
 document.addEventListener('DOMContentLoaded', function (e) {
-    //    let p = new base(prova);
+    //let p = new base(prova);
     //let module = new Proxy(p, prova);
     //module.foo=provaFunc;
     //foo.call(module, 1, 2);
     console.log(module.yoqueser(1, 2))
     console.log(module.bar(2, 1))
-
     //console.log(prova(1,2));
 });
 
